@@ -24,7 +24,11 @@ extern crate test;
 
 
 pub use hll::{HLL};
+pub use pcsa::PCSA;
 
 /// HyperLogLog - Approximates cardinality estimation with minimal memory overhead
 pub mod hll;
+
+/// Probalistic Counter with Stochastic Averaging - Approximate cardinality estimation
+pub mod pcsa;
 
