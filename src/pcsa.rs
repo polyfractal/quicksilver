@@ -37,7 +37,7 @@ impl PCSA {
     ///
     /// Complete PCSA Memory chart for reference (including per-object overhead, minus static overheads):
     ///
-    /// <table><tr><td style="width:100px; font-weight: bold">Precision</td><td style="width:150px; font-weight: bold">Size</td><td style="width:300px; font-weight: bold">Error on 1m Cardinality Test</td><td style="width:300px; font-weight: bold">Worst Case Estimate Error (+/-)</td>
+    /// <table><tr><td style="width:100px; font-weight: bold">Precision</td><td style="width:200px; font-weight: bold">Size</td><td style="width:300px; font-weight: bold">Error on 1m Cardinality Test</td><td style="width:300px; font-weight: bold">Worst Case Estimate Error (+/-)</td>
     /// <tr><td>4</td><td>80 bytes</td> <td>0.09%</td> <td>39.00%</td></tr>
     /// <tr><td>5</td><td>144 bytes</td> <td>4.14%</td> <td>34.88%</td></tr>
     /// <tr><td>6</td><td>272 bytes</td> <td>1.18%</td> <td>31.84%</td></tr>
@@ -52,7 +52,7 @@ impl PCSA {
     /// <tr><td>15</td><td>131088 bytes</td> <td>0.18%</td> <td>20.13%</td></tr>
     /// </table>
     ///
-    /// ### Usage
+    ///### Usage
     ///
     ///```
     ///let mut pcsa = PCSA::new(10);
