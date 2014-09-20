@@ -51,6 +51,7 @@ impl PCSA {
     /// <tr><td>14</td><td>65552 bytes</td> <td>0.20%</td> <td>20.84%</td></tr>
     /// <tr><td>15</td><td>131088 bytes</td> <td>0.18%</td> <td>20.13%</td></tr>
     /// </table>
+    ///
     /// ### Usage
     ///
     ///```
