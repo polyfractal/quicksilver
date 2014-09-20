@@ -1,4 +1,5 @@
 
+#[experimental]
 
 use std::cmp::{Ordering};
 use core::slice::{Found, NotFound};
