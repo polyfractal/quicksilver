@@ -181,7 +181,7 @@ impl HLL {
     ///
     /// Complete HLL Memory chart for reference (including per-object overhead, minus static overheads):
     ///
-    /// <table><tr><td style="width:100px; font-weight: bold">Precision</td><td style="width:150px; font-weight: bold">Size</td><td style="width:300px; font-weight: bold">Worst Case Estimate Accuracy (+/-)</td>
+    /// <table><tr><td style="width:100px; font-weight: bold">Precision</td><td style="width:150px; font-weight: bold">Size</td><td style="width:300px; font-weight: bold">Worst Case Estimate Error (+/-)</td>
     /// <tr><td>4</td><td>48 bytes</td><td>39.00%</td></tr>
     /// <tr><td>5</td><td>60 bytes</td><td>27.50%</td></tr>
     /// <tr><td>6</td><td>84 bytes</td><td>19.50%</td></tr>
