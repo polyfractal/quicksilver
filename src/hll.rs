@@ -240,11 +240,11 @@ impl HLL {
     /// // You should probably use something *other* than SipHash, since it is cryptographic
     /// // and slow
     /// let hash: u64 = hash::hash(&19u);
-    /// hll.offer_hashed(hash);
+    /// hll.offer_hashed(&hash);
     ///
     ///```
     #[experimental]
-    pub fn offer_hashed(&mut self, hash: u64) {
+    pub fn offer_hashed(&mut self, hash: &u64) {
         let index =  (hash >> ((64 - self.p) as uint) ) as uint;
         let shifted = (hash << self.p) | (1 << (self.p -1));
         let run: uint = (shifted.leading_zeros() + 1) as uint;
@@ -414,7 +414,7 @@ mod test {
 
         for i in range(0u, 1000000) {
             let hash = hash::hash(&i);
-            hll.offer_hashed(hash);
+            hll.offer_hashed(&hash);
         }
 
         let cardinality = hll.cardinality();
@@ -433,7 +433,7 @@ mod test {
 
             for i in range(0u, size) {
                 let hash = hash::hash(&i);
-                hll.offer_hashed(hash);
+                hll.offer_hashed(&hash);
             }
 
             let cardinality = hll.cardinality();
@@ -459,7 +459,7 @@ mod test {
 
         let start = precise_time_ns();
         for i in range_step(1u, size, 1) {
-            hll.offer_hashed(values[i]);
+            hll.offer_hashed(&values[i]);
         }
         let end = precise_time_ns();
         let cardinality = hll.cardinality();

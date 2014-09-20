@@ -36,7 +36,7 @@ let mut hll = HLL::new(12);
 
 for i in range(0u, 1000000) {
   let hash = hash::hash(&i);
-  hll.offer_hashed(hash);
+  hll.offer_hashed(&hash);
 }
 
 let cardinality = hll.cardinality();
