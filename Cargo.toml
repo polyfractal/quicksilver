@@ -4,9 +4,9 @@ name = "quicksilver"
 version = "0.1.0"
 
 authors = ["Zachary Tong <zacharyjtong@gmail.com>"]
-tags = []
+tags = ["data structures", "approximate", "algorithms", "hyperloglog", "sketches"]
 
-[lib]
+[[lib]]
 
 name = "quicksilver"
 path = "src/lib.rs"
