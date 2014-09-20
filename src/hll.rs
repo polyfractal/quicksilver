@@ -1,6 +1,4 @@
 
-#[experimental]
-
 use std::cmp::{Ordering};
 use core::slice::{Found, NotFound};
 
@@ -86,6 +84,7 @@ impl RegisterSet {
     /// Create a new RegisterSet containing `m` registers
     ///
     /// This will create `(m + 4) / 5` u32 registers stored in a vector
+    #[experimental]
     pub fn new(m: uint) -> RegisterSet {
          // Get the full words required
         let words: uint = (m + REG_PER_WORD - 1) / REG_PER_WORD;
@@ -97,6 +96,7 @@ impl RegisterSet {
 
     /// Set the register at index `i` to `value` if and only if the existing register value is less
     /// than `value`
+    #[experimental]
     pub fn set_if_greater(&mut self, i: uint, value: uint ) {
         if value > self.get(i) {
             self.set(i, value);
@@ -104,6 +104,7 @@ impl RegisterSet {
     }
 
     /// Get the value of the register at index `i`
+    #[experimental]
     pub fn get(&self, i: uint) -> uint {
         let mut word = self.r[i / REG_PER_WORD] as uint;
         word = word >> REG_WIDTH * (i % REG_PER_WORD);
@@ -111,6 +112,7 @@ impl RegisterSet {
     }
 
     /// Set the value of register at index `i` to `value`
+    #[experimental]
     pub fn set(&mut self, i: uint, value: uint) {
         let word = self.r.get_mut(i / REG_PER_WORD);
         let shift = REG_WIDTH * (i % REG_PER_WORD);
@@ -120,6 +122,7 @@ impl RegisterSet {
     }
 
     /// Returns the amount of memory (in bytes) used by this data structure
+    #[stable]
     pub fn ram_bytes_used(&self) -> uint {
         self.r.len() * ::core::i32::BYTES + ::core::int::BYTES  // registers
     }
@@ -127,6 +130,7 @@ impl RegisterSet {
     /// Returns the amount of overhead memory (in bytes) used by this data structure
     /// This is essentially the cost of several STATIC variables, which is shared across all instantiated
     /// RegisterSets
+    #[stable]
     pub fn ram_bytes_overhead(&self) -> uint {
         ::core::int::BYTES      // REG_WIDTH
         + ::core::int::BYTES    // REG_PER_WORD
@@ -201,6 +205,7 @@ impl HLL {
     /// // Create a HyperLogLog object with `10` precision.
     /// let mut hll = HLL::new(10);
     ///```
+    #[experimental]
     pub fn new(precision: uint) -> HLL {
         let p: uint = match precision {
             t @ 4..18 => t,
@@ -238,6 +243,7 @@ impl HLL {
     /// hll.offer_hashed(hash);
     ///
     ///```
+    #[experimental]
     pub fn offer_hashed(&mut self, hash: u64) {
         let index =  (hash >> ((64 - self.p) as uint) ) as uint;
         let shifted = (hash << self.p) | (1 << (self.p -1));
@@ -249,6 +255,7 @@ impl HLL {
     /// Poll the HyperLogLog for it's current estimation of cardinality.  Compared to offering values to the data
     /// structure, polling for cardinality is relatively expensive (it must traverse all registers and perform some
     /// calculation to estimate cardinality)
+    #[stable]
     pub fn cardinality(&self) -> f64 {
 
         let mut inverse_sum: f64 = 0.0;
@@ -284,6 +291,7 @@ impl HLL {
     }
 
     /// Returns the amount of  memory (in bytes) used by this data structure
+    #[stable]
     pub fn ram_bytes_used(&self) -> uint {
         ::core::int::BYTES                  // p
         + ::core::int::BYTES                // m
@@ -294,6 +302,7 @@ impl HLL {
     /// Returns the amount of overhead memory (in bytes) used by this data structure
     /// This is essentially the cost of several STATIC variables, which is shared across all instantiated
     /// RegisterSets
+    #[stable]
     pub fn ram_bytes_overhead(&self) -> uint {
         let mut consts = 0;
 
@@ -312,6 +321,7 @@ impl HLL {
 
     /// Estimage low-cardinality bias.  This is a contribution from Google's HLL++ which helps correct estimations
     /// when the cardinality is low (since many of the registers will be zero)
+    #[experimental]
     fn estimate_bias(&self, e: f64) -> f64 {
         let raw_estimate_data: &[f64] = RAW_ESTIMATE_DATA[self.p - 4];
         let bias_data = BIAS_DATA[self.p - 4];
@@ -341,6 +351,7 @@ impl HLL {
         }
     }
 
+    #[experimental]
     fn linear_counting(&self, zeros: uint) -> f64 {
         ((self.m * zeros) as f64).ln().round()
     }
